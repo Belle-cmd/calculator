@@ -13,3 +13,22 @@ function muliply(multiplicand, multiplier) {
 function divide(dividend, divisor) {
     return dividend / divisor;
 }
+
+
+/**
+ * Function takes an operator and numbers, and calls a function that matches the specified operator
+ * @param {*} operator math operation
+ * @param {*} number1 number specified by the user
+ * @param {*} number2 number specified by the user
+ */
+function operate(operator, number1, number2) {
+    if (operator === "add") {
+        add(number1, number2);
+    } else if (operator === "subtract") {
+        subtract(number1, number2);
+    } else if (operator === "multiply") {
+        muliply(number1, number2);
+    } else if (operator === "divide") {
+        divide(number1, number2);
+    }
+}
