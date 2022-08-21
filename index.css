@@ -1,0 +1,49 @@
+/* styles used througghout the whole webpage */
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: blanchedalmond;
+    min-height: 100vh;  /* This, flex-direction column, and margin help keep the footer to the bottom */
+}
+a {
+    text-decoration: none;
+}
+.button-container {
+
+}
+.button-number {
+
+}
+
+
+
+.calculator-container {
+    background-color: #c48795;
+    box-shadow: -15px 0 rgb(129, 92, 118);
+    border-radius: 30px;
+    width: 500px;
+    height: 650px;
+    margin: 50px 0;
+}
+
+
+/* Style for the screen where inputs will be shown */
+.screen {
+    background-color: #e9c7cf;
+    height: 30%;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px
+}
+
+
+
+
+footer {
+    background-color: rgb(242, 213, 170);
+    width: 100%;
+    margin-top: auto;
+    text-align: center;
+}
