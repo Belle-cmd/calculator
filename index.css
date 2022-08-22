@@ -84,7 +84,7 @@ button:active {
     flex-direction: column;
     align-items: center;
     background-color: #c48795;
-    box-shadow: -15px 0 rgb(129, 92, 118);
+    box-shadow: -7px 10px rgb(129, 92, 118);
     border-radius: 30px;
     width: 380px;
     height: 600px;
