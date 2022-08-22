@@ -11,8 +11,25 @@
     <div class="calculator-container">
         <div class="screen"></div>
         <div class="button-container">
-            <div id="numbers-btn"></div>
-            <div id="operators-btn"></div>
+            <div class="key">
+                <div class="interactive-buttons">
+                    <button id="clear-entry">CE</button>
+                    <button id="erase">
+                        <img src="img/back.png" alt="">
+                    </button>
+                </div>
+                <div id="grid">
+                    <button class="number" id="ref-to-period">.</button>
+                    <button class="number">(-)</button>
+                </div>
+            </div>
+            <div id="operators">
+                <button>/</button>
+                <button>x</button>
+                <button>-</button>
+                <button>+</button>
+                <button>=</button>
+            </div>
         </div>
     </div>
     <footer>

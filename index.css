@@ -11,28 +11,89 @@ body {
 a {
     text-decoration: none;
 }
+button {
+    font-size: inherit;
+    font-weight: 500;
+    border: none;
+    background-color: #ffe1dc;
+    box-shadow: -5px 5px rgb(103, 58, 58);
+    cursor: pointer;
+    font-size: inherit;
+    border-radius: 50%;
+    text-align: center;
+}
+button:hover {
+    background-color: #dfc2bc;
+}
+button:active {
+    background-color: #dfc2bc;
+    box-shadow: 0 5px rgb(103, 58, 58);
+    transform: translateY(4px);
+}
+
+
+/* Specific styles for button groups */
 .button-container {
-
+    display: flex;
+    font-size: 25px;
 }
-.button-number {
-
+.key {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5px;
+    padding-right: 30px;
 }
-
+.interactive-buttons {
+    display: flex;
+    gap: 20px;
+}
+.interactive-buttons button {
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    padding: 0;
+    margin: 0;
+}
+.interactive-buttons img {
+    width: 30px;
+    height: 30px;
+    padding-top: 4px;
+    padding-bottom: 0;
+    border: none;
+}
+#grid {
+    display: grid;
+    grid-template: repeat(4, 60px)/repeat(3, 60px);
+    grid-gap: 20px;
+    padding-top: 20px;
+}
+#operators {
+    display: flex;
+    flex-direction: column;
+}
+#operators button {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 20px;
+}
 
 
 .calculator-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: #c48795;
     box-shadow: -15px 0 rgb(129, 92, 118);
     border-radius: 30px;
-    width: 500px;
-    height: 650px;
+    width: 380px;
+    height: 600px;
     margin: 50px 0;
 }
 
 
 /* Style for the screen where inputs will be shown */
 .screen {
-    background-color: #e9c7cf;
+    /* background-color: #e9c7cf; */
     height: 30%;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px
