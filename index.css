@@ -36,6 +36,7 @@ button:active {
 .button-container {
     display: flex;
     font-size: 25px;
+    margin-top: 15px;
 }
 .key {
     display: flex;
@@ -93,12 +94,19 @@ button:active {
 
 /* Style for the screen where inputs will be shown */
 .screen {
-    /* background-color: #e9c7cf; */
     height: 30%;
+    width: inherit;
+    background-color: #d49aa7;
     border-top-left-radius: 30px;
-    border-top-right-radius: 30px
-}
+    border-top-right-radius: 30px;
+    text-overflow: clip;  /* handles excess user input */
+    overflow: hidden;
 
+}
+.screen p {
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
 
 

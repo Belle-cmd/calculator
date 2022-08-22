@@ -1,8 +1,9 @@
 "use strict";
+let displayValue = "";
 
 // DOM Elements
-const btnContainerID = document.getElementById("grid");
-const periodBtnID = document.getElementById("ref-to-period");
+const numBtnID = document.getElementById("grid").querySelectorAll("button");
+const operatorBtnID = document.getElementById("grid").querySelectorAll("button");
 
 
 // all functions
@@ -43,17 +44,11 @@ function operate(operator, number1, number2) {
 }
 
 
-function populateBtnNumbers() {
-    for (let i = 9; i > -1; i--) {
-        const btn = document.createElement("button");
-        btn.textContent = i;
-        btn.classList.add("number");
-        btnContainerID.insertBefore(btn, periodBtnID);  // creates the numbers before the period button
-    }
-}
-
-
-// events
-window.onload = (event) => {
-    populateBtnNumbers();
-}
+numBtnID.forEach(btn => {
+    btn.addEventListener("click", () => {
+        displayValue += btn.textContent;
+    })
+});
+operatorBtnID.forEach(opBtn => {
+    displayValue += opBtn.textContent;
+});
