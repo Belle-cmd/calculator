@@ -11,8 +11,8 @@
 <body>
     <div class="calculator-container">
         <div class="screen">
-            <p id="equation"></p>
-            <p id="input"></p>
+            <p id="full-input"></p> <!--numbers including operators-->
+            <p id="input"></p>  <!--number the user is inputting-->
         </div>
         <div class="button-container">
             <div class="key">
@@ -39,13 +39,14 @@
             </div>
             <div id="operators">
                 <button>/</button>
-                <button>x</button>
+                <button>*</button>
                 <button>-</button>
                 <button>+</button>
                 <button>=</button>
             </div>
         </div>
     </div>
+    <p id="warning"></p>
     <footer>
         <p>Copyright © <a href="https://github.com/Belle-cmd">Belle-cmd</a></p>
     </footer>
