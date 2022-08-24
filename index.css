@@ -102,8 +102,13 @@ button:active {
     text-overflow: clip;  /* handles excess user input */
     overflow: hidden;
 
+    display: flex;
+    flex-direction: column;
+
 }
 .screen p {
+    font-size: 30px;
+    margin: 0;
     padding-left: 10px;
     padding-right: 10px;
 }

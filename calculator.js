@@ -1,10 +1,10 @@
 "use strict";
-let displayValue = "";
+let displayValue = {};
 
 // DOM Elements
 const numBtnID = document.getElementById("grid").querySelectorAll("button");
 const operatorBtnID = document.getElementById("grid").querySelectorAll("button");
-
+const inputID = document.getElementById("input");
 
 // all functions
 
@@ -43,12 +43,15 @@ function operate(operator, number1, number2) {
     }
 }
 
+function showInput(input) {
+    inputID.textContent += input;
+}
 
 numBtnID.forEach(btn => {
     btn.addEventListener("click", () => {
-        displayValue += btn.textContent;
+        showInput(btn.textContent);
     })
 });
 operatorBtnID.forEach(opBtn => {
-    displayValue += opBtn.textContent;
+    
 });
