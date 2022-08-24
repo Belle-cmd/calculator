@@ -106,11 +106,21 @@ button:active {
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-end;
+    position: relative;
 }
 .screen p {
+    position: absolute;  /* forces p tags to follow its parent's position */
     font-size: 40px;
     margin: 0;
     padding: 20px 15px;
+}
+#input {
+    right: 0;  /* position the p tags within the parent container */
+    bottom: 0;
+}
+#full-input {
+    top: 0;
+    right: 0;
 }
 
 
