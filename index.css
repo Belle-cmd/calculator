@@ -91,20 +91,6 @@ button:active {
     margin: 50px 0;
 }
 
-/* animation that gets toggled through class being added/removed (used for errors) */
-.error-shake {
-    animation: shake 0.3s;
-    animation-iteration-count: 1;
-  }
-  @keyframes shake {
-    0% { transform: translate(4px, 5px) rotate(2deg); }
-    20% { transform: translate(-5px, -3px) rotate(-2deg); }
-    40% { transform: translate(-3px, 0px) rotate(1deg); }
-    60% { transform: translate(5px, 3px) rotate(0deg); }
-    80% { transform: translate(1px, -1px) rotate(2deg); }
-    100% { transform: translate(-4px, 5px) rotate(-2deg); }
-  }
-
 
 /* Style for the screen where inputs will be shown */
 .screen {
