@@ -104,13 +104,13 @@ button:active {
 
     display: flex;
     flex-direction: column;
-
+    align-items: flex-end;
+    justify-content: flex-end;
 }
 .screen p {
-    font-size: 30px;
+    font-size: 40px;
     margin: 0;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 30px 10px;
 }
 
 

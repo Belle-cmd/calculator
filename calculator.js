@@ -5,6 +5,7 @@ let displayValue = {};
 const numBtnID = document.getElementById("grid").querySelectorAll("button");
 const operatorBtnID = document.getElementById("grid").querySelectorAll("button");
 const inputID = document.getElementById("input");
+const eraseBtnID = document.getElementById("erase");
 
 // all functions
 
@@ -43,15 +44,23 @@ function operate(operator, number1, number2) {
     }
 }
 
-function showInput(input) {
-    inputID.textContent += input;
+
+
+function clearInput() {
+    const newText = inputID.textContent.slice(0,inputID.textContent.length-1);  // output specified char
+    inputID.textContent = newText;
+    console.log(newText);
 }
+
+
+// EventListeners attached to buttons
 
 numBtnID.forEach(btn => {
     btn.addEventListener("click", () => {
-        showInput(btn.textContent);
+        inputID.textContent += btn.textContent;
     })
 });
 operatorBtnID.forEach(opBtn => {
     
 });
+eraseBtnID.addEventListener("click",() => clearInput());
