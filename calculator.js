@@ -61,9 +61,7 @@ function clearInput() {
 
 function showErrorMessage(message) {
     warningID.textContent = message;
-    calcContainer.classList.add("error-shake");
     const timeOut = setTimeout(() => {
-        calcContainer.classList.remove("error-shake");
         warningID.textContent = "";
     }, 1000);
 }
