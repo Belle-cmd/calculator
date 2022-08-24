@@ -11,6 +11,7 @@ const clearBtnID = document.getElementById("clear-entry");
 const inputID = document.getElementById("input");
 const fullInputID = document.getElementById("full-input");
 const warningID = document.getElementById("warning");
+const calcContainer = document.querySelector(".calculator-container");
 
 // all functions
 
@@ -58,6 +59,15 @@ function clearInput() {
     console.log(newText);
 }
 
+function showErrorMessage(message) {
+    warningID.textContent = message;
+    calcContainer.classList.add("error-shake");
+    const timeOut = setTimeout(() => {
+        calcContainer.classList.remove("error-shake");
+        warningID.textContent = "";
+    }, 1000);
+}
+
 
 
 // EventListeners attached to buttons
@@ -72,7 +82,7 @@ operatorBtnID.forEach(opBtn => {
     opBtn.addEventListener("click", () => {
         warningID.textContent = "";
         if (inputID.textContent === "") {
-            warningID.textContent  = "Please enter numbers to calculate!"
+            showErrorMessage("Please enter numbers to calculate!");
             return;
         }
 
