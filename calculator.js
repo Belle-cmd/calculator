@@ -6,6 +6,7 @@ const numBtnID = document.getElementById("grid").querySelectorAll("button");
 const operatorBtnID = document.getElementById("grid").querySelectorAll("button");
 const inputID = document.getElementById("input");
 const eraseBtnID = document.getElementById("erase");
+const clearBtnID = document.getElementById("clear-entry");
 
 // all functions
 
@@ -64,3 +65,6 @@ operatorBtnID.forEach(opBtn => {
     
 });
 eraseBtnID.addEventListener("click",() => clearInput());
+clearBtnID.addEventListener("click", () => {
+    inputID.textContent = "";
+});
