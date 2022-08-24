@@ -80,7 +80,6 @@ numBtnID.forEach(btn => {
 });
 operatorBtnID.forEach(opBtn => {
     opBtn.addEventListener("click", () => {
-        warningID.textContent = "";
         if (inputID.textContent === "") {
             showErrorMessage("Please enter numbers to calculate!");
             return;
@@ -88,10 +87,12 @@ operatorBtnID.forEach(opBtn => {
 
         if (firstOperand!=="" && inputID.textContent!=="") {
             secondOPerand = inputID.textContent;
-            curOperator = opBtn.textContent;
             const answer = operate(curOperator, Number(firstOperand), Number(secondOPerand)); 
+            curOperator = opBtn.textContent;
             fullInputID.textContent = answer + " " + curOperator;
             firstOperand = answer;  // prepares for the 2nd operand
+            console.log(opBtn.textContent);
+            
         } else {
             firstOperand = inputID.textContent;
             curOperator = opBtn.textContent;
