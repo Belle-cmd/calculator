@@ -1,9 +1,9 @@
 "use strict";
-let firstOperand = "";
-let secondOPerand = "";
+let operand1 = "";  // always storing string
+let operand2 = "";
 let curOperator = "";
 
-// DOM Elements
+
 const numBtnID = document.getElementById("grid").querySelectorAll("button");
 const operatorBtnID = document.getElementById("operators").querySelectorAll("button");
 const eraseBtnID = document.getElementById("erase");
@@ -13,7 +13,7 @@ const fullInputID = document.getElementById("full-input");
 const warningID = document.getElementById("warning");
 const calcContainer = document.querySelector(".calculator-container");
 
-// all functions
+
 
 function add(addend1, addend2) {
 	return addend1 + addend2;
@@ -72,44 +72,52 @@ function showErrorMessage(message) {
 
 numBtnID.forEach(btn => {
     btn.addEventListener("click", () => {
-        warningID.textContent = "";
+    if (fullInputID.textContent!== "") {
+            // an operand and an operator is waiting for its 2nd input
+            fullInputID.textContent+= btn.textContent;
+            return;
+        }
         inputID.textContent += btn.textContent;
     })
 });
 operatorBtnID.forEach(opBtn => {
     opBtn.addEventListener("click", () => {
-        if (inputID.textContent === "") {
-            showErrorMessage("Please enter numbers to calculate!");
-            return;
-        }
-
-        if (firstOperand!=="" && inputID.textContent!=="") {
-            secondOPerand = inputID.textContent;
-            const answer = operate(curOperator, Number(firstOperand), Number(secondOPerand)); 
+         if ((inputID.textContent !== "") &&(operand1 === "") && (operand2 === "") && (curOperator=== "")) {
+            // retrieving 1st operand, no 2nd operand, no operator
+            operand1 = inputID.textContent;
             curOperator = opBtn.textContent;
-            fullInputID.textContent = answer + " " + curOperator;
-            firstOperand = answer;  // prepares for the 2nd operand
-            console.log(opBtn.textContent);
+            fullInputID.textContent = operand1 + curOperator;
+            inputID.textContent = "";
+        } else if ((fullInputID.textContent!=="") && (inputID.textContent==="") && (opBtn.textContent!=="=")) {
+            // retrieving 2nd operand and user is inputting another operator (+, -, *, /)
+
+            // since 2 pair of numbers are only getting calculated, last item is always the 2nd operand
+            operand2 = fullInputID.textContent.split(/[+\-\*\/]/)[1];
+            const result = operate(curOperator, Number(operand1), Number(operand2));
+            curOperator = opBtn.textContent;  // the other operator, separate from 2nd operand's operator
+            fullInputID.textContent = result + curOperator;
+
+            // stored as string so that calculation steps (see if-statements) can be told apart
+            operand1 = "" + result;
+            operand2 = "";
             
-        } else {
-            firstOperand = inputID.textContent;
+        } else if ((fullInputID.textContent!=="") && (inputID.textContent==="") && (opBtn.textContent==="=")) {
+            // retrieving 2nd operand and the user chooses "=", instead of other operators
+            operand2 = fullInputID.textContent.split(/[+\-\*\/]/)[1];
+            const result = operate(curOperator, Number(operand1), Number(operand2));
             curOperator = opBtn.textContent;
-            fullInputID.textContent = firstOperand + " " + curOperator;
-        }
-        inputID.textContent = "";
-
-
-        if ((opBtn.textContent==="=") && (firstOperand!=="") && (secondOPerand!=="")) {
-            const answer = operate(curOperator, Number(firstOperand), Number(secondOPerand));
-            inputID.textContent = answer;
+            inputID.textContent = result;
+            operand1 = "";
+            operand2 = "";
+            curOperator = "";
         }
     });
 });
 eraseBtnID.addEventListener("click",() => clearInput());
 clearBtnID.addEventListener("click", () => {
-    firstOperand = "";
+    operand1 = "";
     curOperator = "";
-    secondOPerand = "";
+    operand2 = "";
     inputID.textContent = "";
     fullInputID.textContent = "";
 });
