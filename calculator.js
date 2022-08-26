@@ -85,7 +85,17 @@ function showErrorMessage(message) {
 
 numBtnID.forEach(btn => {
     btn.addEventListener("click", () => {
-    if (fullInputID.textContent!== "") {
+        const periodInput = inputID.textContent.includes(".");
+        const periodFull = fullInputID.textContent.includes(".");
+        if (periodFull && btn.textContent===".") return;
+        if (periodInput && btn.textContent===".") return;
+
+        // when calculation and answer are shown on screen, only allow the answer to be altered
+        if (fullInputID.textContent!=="" && inputID.textContent !=="") {
+            inputID.textContent += btn.textContent;
+            return;
+        }
+        if (fullInputID.textContent!== "") {
             // an operand and an operator is waiting for its 2nd input
             fullInputID.textContent+= btn.textContent;
             return;
