@@ -8,8 +8,8 @@ const numBtnID = document.getElementById("grid").querySelectorAll("button");
 const operatorBtnID = document.getElementById("operators").querySelectorAll("button");
 const eraseBtnID = document.getElementById("erase");
 const clearBtnID = document.getElementById("clear-entry");
-const inputID = document.getElementById("input");
-const fullInputID = document.getElementById("full-input");
+const inputID = document.getElementById("input");  // show answer or 1st operand inpupt
+const fullInputID = document.getElementById("full-input");  // show 1st operand, operator, 2nd operand input
 const warningID = document.getElementById("warning");
 const calcContainer = document.querySelector(".calculator-container");
 
@@ -31,12 +31,12 @@ function divide(dividend, divisor) {
     return dividend / divisor;
 }
 
-
 /**
  * Function takes an operator and numbers, and calls a function that matches the specified operator
  * @param {*} operator math operation to do
  * @param {*} number1 number specified by the user
  * @param {*} number2 number specified by the user
+ * @returns the answer to the calculation
  */
 function operate(operator, number1, number2) {
     let answer = 0;
@@ -52,9 +52,12 @@ function operate(operator, number1, number2) {
     return answer;
 }
 
-
+/**
+ * Erases the user's input, 1 character at a time.
+ * @returns None
+ */
 function clearInput() {
-  if (fullInputID.textContent!=="") {
+  if (fullInputID.textContent!=="" && inputID.textContent==="") {
     const original = fullInputID.textContent.split(/[\d]/);
     const inputs = fullInputID.textContent.split(/[+\-\*\/]/);
     if (inputs[1]==="") {
@@ -67,7 +70,6 @@ function clearInput() {
   }
   const newText = inputID.textContent.slice(0,inputID.textContent.length-1);  // remove last char
   inputID.textContent = newText;
-  console.log(newText);
 }
 
 function showErrorMessage(message) {
