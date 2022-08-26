@@ -115,6 +115,7 @@ operatorBtnID.forEach(opBtn => {
             curOperator = opBtn.textContent;
             fullInputID.textContent = operand1 + curOperator;
             inputID.textContent = "";
+            return;
         } else if ((fullInputID.textContent!=="") && (inputID.textContent==="") && (opBtn.textContent!=="=")) {
             // retrieving 2nd operand and user is inputting another operator (+, -, *, /)
 
@@ -127,7 +128,7 @@ operatorBtnID.forEach(opBtn => {
             // stored as string so that calculation steps (see if-statements) can be told apart
             operand1 = "" + result;
             operand2 = "";
-            
+            return;
         } else if ((fullInputID.textContent!=="") && (inputID.textContent==="") && (opBtn.textContent==="=")) {
             // retrieving 2nd operand and the user chooses "=", instead of other operators
             operand2 = fullInputID.textContent.split(/[+\-\*\/]/)[1];
@@ -137,6 +138,7 @@ operatorBtnID.forEach(opBtn => {
             operand1 = "";
             operand2 = "";
             curOperator = "";
+            return;
         }
         showErrorMessage("Enter a number before choosing an operation");
     });
