@@ -54,9 +54,20 @@ function operate(operator, number1, number2) {
 
 
 function clearInput() {
-    const newText = inputID.textContent.slice(0,inputID.textContent.length-1);  // output specified char
-    inputID.textContent = newText;
-    console.log(newText);
+  if (fullInputID.textContent!=="") {
+    const original = fullInputID.textContent.split(/[\d]/);
+    const inputs = fullInputID.textContent.split(/[+\-\*\/]/);
+    if (inputs[1]==="") {
+        return; // no more 2nd operand left to erase
+    }
+    const new2ndInput = inputs[1].slice(0,inputs[1].length-1);
+
+    // rebuilt the new equation
+    fullInputID.textContent = inputs[0] + original[(original.length - new2ndInput.length)-2] + new2ndInput;
+  }
+  const newText = inputID.textContent.slice(0,inputID.textContent.length-1);  // remove last char
+  inputID.textContent = newText;
+  console.log(newText);
 }
 
 function showErrorMessage(message) {
