@@ -76,7 +76,7 @@ function showErrorMessage(message) {
     warningID.textContent = message;
     const timeOut = setTimeout(() => {
         warningID.textContent = "";
-    }, 1000);
+    }, 3000);
 }
 
 
@@ -95,6 +95,10 @@ numBtnID.forEach(btn => {
 });
 operatorBtnID.forEach(opBtn => {
     opBtn.addEventListener("click", () => {
+        if (inputID.textContent!="" && opBtn.textContent==="=") {
+            showErrorMessage("Enter 2 operands and an operation before choosing =");
+            return;
+        }
          if ((inputID.textContent !== "") &&(operand1 === "") && (operand2 === "") && (curOperator=== "")) {
             // retrieving 1st operand, no 2nd operand, no operator
             operand1 = inputID.textContent;
@@ -124,6 +128,7 @@ operatorBtnID.forEach(opBtn => {
             operand2 = "";
             curOperator = "";
         }
+        showErrorMessage("Enter a number before choosing an operation");
     });
 });
 eraseBtnID.addEventListener("click",() => clearInput());

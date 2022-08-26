@@ -124,6 +124,12 @@ button:active {
 }
 
 
+#warning {
+    font-size: 20px;
+    font-weight: 500;
+    color: red;
+}
+
 
 footer {
     background-color: rgb(242, 213, 170);
