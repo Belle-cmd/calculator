@@ -82,7 +82,11 @@ function showErrorMessage(message) {
 
 
 // EventListeners attached to buttons
-
+document.addEventListener("keydown", e => {
+    if (e.key >= 48 || e.key <= 57) {
+        inputID.textContent += e.key;
+    }
+});
 numBtnID.forEach(btn => {
     btn.addEventListener("click", () => {
         const periodInput = inputID.textContent.includes(".");
