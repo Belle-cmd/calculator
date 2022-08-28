@@ -132,7 +132,7 @@ function operatorEvents(data) {
  * Detect user's number input and checks for the amount of periods used
  * @param {*} data the value of e.key (user's input from keyboard) or the value of opBtn.textContent 
  *                  (user's input by clicking the operator buttons)
- * @returns 
+ * @returns None; used to end the function
  */
 function inputNumbers(data) {
     const periodInput = inputID.textContent.includes(".");

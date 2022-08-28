@@ -11,6 +11,8 @@ Live preview: [link](https://belle-cmd.github.io/calculator/)
 - Git commit message conventions
 - Regular expressions
 - DOM element manipulation
+- keyboard detection using JavaScript
+- Colour theory and values (art concepts)
 
 
 ## Artists:
