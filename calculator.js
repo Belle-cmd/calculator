@@ -54,7 +54,7 @@ function operate(operator, number1, number2) {
 
 /**
  * Erases the user's input, 1 character at a time.
- * @returns None
+ * @returns None; used to end the function
  */
 function clearInput() {
   if (fullInputID.textContent!=="" && inputID.textContent==="") {
@@ -72,6 +72,10 @@ function clearInput() {
   inputID.textContent = newText;
 }
 
+/**
+ * Show error message to the user and remove it after 3 seconds
+ * @param {*} message String error message
+ */
 function showErrorMessage(message) {
     warningID.textContent = message;
     const timeOut = setTimeout(() => {
@@ -79,72 +83,94 @@ function showErrorMessage(message) {
     }, 3000);
 }
 
+/**
+ * Perform calculations based on the state of the inputID and fullInputID and the chosen operator
+ * @param {*} data the value of e.key (user's input from keyboard) or the value of opBtn.textContent 
+ *                  (user's input by clicking the operator buttons)
+ * @returns None; used to end the function
+ */
+function operatorEvents(data) {
+    if (inputID.textContent!="" && data==="=") {
+        showErrorMessage("Enter 2 operands and an operation before choosing =");
+        return;
+    }
+     if ((inputID.textContent !== "") &&(operand1 === "") && (operand2 === "") && (curOperator=== "")) {
+        // retrieving 1st operand, no 2nd operand, no operator
+        operand1 = inputID.textContent;
+        curOperator = data;
+        fullInputID.textContent = operand1 + curOperator;
+        inputID.textContent = "";
+        return;
+    } else if ((fullInputID.textContent!=="") && (inputID.textContent==="") && (data!=="=")) {
+        // retrieving 2nd operand and user is inputting another operator (+, -, *, /)
+
+        // since 2 pair of numbers are only getting calculated, last item is always the 2nd operand
+        operand2 = fullInputID.textContent.split(/[+\-\*\/]/)[1];
+        const result = operate(curOperator, Number(operand1), Number(operand2));
+        curOperator = data;  // the other operator, separate from 2nd operand's operator
+        fullInputID.textContent = result + curOperator;
+
+        // stored as string so that calculation steps (see if-statements) can be told apart
+        operand1 = "" + result;
+        operand2 = "";
+        return;
+    } else if ((fullInputID.textContent!=="") && (inputID.textContent==="") && (data==="=")) {
+        // retrieving 2nd operand and the user chooses "=", instead of other operators
+        operand2 = fullInputID.textContent.split(/[+\-\*\/]/)[1];
+        const result = operate(curOperator, Number(operand1), Number(operand2));
+        curOperator = data;
+        inputID.textContent = result;
+        operand1 = "";
+        operand2 = "";
+        curOperator = "";
+        return;
+    }
+    showErrorMessage("Enter a number before choosing an operation");
+}
+
+/**
+ * Detect user's number input and checks for the amount of periods used
+ * @param {*} data the value of e.key (user's input from keyboard) or the value of opBtn.textContent 
+ *                  (user's input by clicking the operator buttons)
+ * @returns 
+ */
+function inputNumbers(data) {
+    const periodInput = inputID.textContent.includes(".");
+    const periodFull = fullInputID.textContent.includes(".");
+    if (periodFull && data===".") return;
+    if (periodInput && data===".") return;
+
+    // when calculation and answer are shown on screen, only allow the answer to be altered
+    if (fullInputID.textContent!=="" && inputID.textContent !=="") {
+        inputID.textContent += data;
+        return;
+    }
+    if (fullInputID.textContent!== "") {
+        // an operand and an operator is waiting for its 2nd input
+        fullInputID.textContent+= data;
+        return;
+    }
+    inputID.textContent += data;
+}
+
 
 
 // EventListeners attached to buttons
 document.addEventListener("keydown", e => {
-    if (e.key >= 48 || e.key <= 57) {
-        inputID.textContent += e.key;
-    }
+    if (e.key >= 0 || e.key <= 9) inputNumbers(e.key);
+    if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/" || e.key === "=") operatorEvents(e.key);
+    if (e.key === "Backspace") clearInput();
+    if (e.key === "Enter") operatorEvents("=");
+    
 });
 numBtnID.forEach(btn => {
     btn.addEventListener("click", () => {
-        const periodInput = inputID.textContent.includes(".");
-        const periodFull = fullInputID.textContent.includes(".");
-        if (periodFull && btn.textContent===".") return;
-        if (periodInput && btn.textContent===".") return;
-
-        // when calculation and answer are shown on screen, only allow the answer to be altered
-        if (fullInputID.textContent!=="" && inputID.textContent !=="") {
-            inputID.textContent += btn.textContent;
-            return;
-        }
-        if (fullInputID.textContent!== "") {
-            // an operand and an operator is waiting for its 2nd input
-            fullInputID.textContent+= btn.textContent;
-            return;
-        }
-        inputID.textContent += btn.textContent;
+        inputNumbers(btn.textContent);
     })
 });
 operatorBtnID.forEach(opBtn => {
     opBtn.addEventListener("click", () => {
-        if (inputID.textContent!="" && opBtn.textContent==="=") {
-            showErrorMessage("Enter 2 operands and an operation before choosing =");
-            return;
-        }
-         if ((inputID.textContent !== "") &&(operand1 === "") && (operand2 === "") && (curOperator=== "")) {
-            // retrieving 1st operand, no 2nd operand, no operator
-            operand1 = inputID.textContent;
-            curOperator = opBtn.textContent;
-            fullInputID.textContent = operand1 + curOperator;
-            inputID.textContent = "";
-            return;
-        } else if ((fullInputID.textContent!=="") && (inputID.textContent==="") && (opBtn.textContent!=="=")) {
-            // retrieving 2nd operand and user is inputting another operator (+, -, *, /)
-
-            // since 2 pair of numbers are only getting calculated, last item is always the 2nd operand
-            operand2 = fullInputID.textContent.split(/[+\-\*\/]/)[1];
-            const result = operate(curOperator, Number(operand1), Number(operand2));
-            curOperator = opBtn.textContent;  // the other operator, separate from 2nd operand's operator
-            fullInputID.textContent = result + curOperator;
-
-            // stored as string so that calculation steps (see if-statements) can be told apart
-            operand1 = "" + result;
-            operand2 = "";
-            return;
-        } else if ((fullInputID.textContent!=="") && (inputID.textContent==="") && (opBtn.textContent==="=")) {
-            // retrieving 2nd operand and the user chooses "=", instead of other operators
-            operand2 = fullInputID.textContent.split(/[+\-\*\/]/)[1];
-            const result = operate(curOperator, Number(operand1), Number(operand2));
-            curOperator = opBtn.textContent;
-            inputID.textContent = result;
-            operand1 = "";
-            operand2 = "";
-            curOperator = "";
-            return;
-        }
-        showErrorMessage("Enter a number before choosing an operation");
+        operatorEvents(opBtn.textContent);
     });
 });
 eraseBtnID.addEventListener("click",() => clearInput());
